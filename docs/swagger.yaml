@@ -9,6 +9,11 @@ paths:
   /files:
     get:
       description: Mendapatkan daftar semua file yang tersimpan
+      parameters:
+      - description: Subdirectory path (optional)
+        in: query
+        name: dir
+        type: string
       produces:
       - application/json
       responses:

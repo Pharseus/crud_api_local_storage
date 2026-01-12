@@ -12,7 +12,6 @@ import (
 	"github.com/go-chi/chi/v5"
 )
 
-// path buat file
 const storageRoot = "D:/storage-local"
 const maxUpload = 50 * 1024 // 5MB
 
@@ -139,6 +138,7 @@ func DeleteFiles(w http.ResponseWriter, r *http.Request) {
 // @Description Mendapatkan daftar semua file yang tersimpan
 // @Tags Files
 // @Produce json
+// @Param dir query string false "Subdirectory path (optional)"
 // @Success 200 {array} map[string]interface{} "List of files"
 // @Failure 500 {object} map[string]string "Internal server error"
 // @Router /files [get]

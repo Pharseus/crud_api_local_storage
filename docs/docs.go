@@ -26,6 +26,14 @@ const docTemplate = `{
                     "Files"
                 ],
                 "summary": "List all files",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Subdirectory path (optional)",
+                        "name": "dir",
+                        "in": "query"
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "List of files",
@@ -191,6 +199,7 @@ const docTemplate = `{
     }
 }`
 
+// SwaggerInfo holds exported Swagger Info so clients can modify it
 var SwaggerInfo = &swag.Spec{
 	Version:          "1.0",
 	Host:             "",
