@@ -1,0 +1,123 @@
+info:
+  contact: {}
+  description: API untuk upload, download, list, dan delete file menggunakan local
+    storage
+  termsOfService: http://swagger.io/terms/
+  title: File Management API
+  version: "1.0"
+paths:
+  /files:
+    get:
+      description: Mendapatkan daftar semua file yang tersimpan
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: List of files
+          schema:
+            items:
+              additionalProperties: true
+              type: object
+            type: array
+        "500":
+          description: Internal server error
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      summary: List all files
+      tags:
+      - Files
+  /files/{path}:
+    delete:
+      description: Menghapus file dari local storage
+      parameters:
+      - description: File path to delete
+        in: path
+        name: path
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: File deleted
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "404":
+          description: File not found
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "500":
+          description: Internal server error
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      summary: Delete file
+      tags:
+      - Files
+  /files/upload:
+    post:
+      consumes:
+      - multipart/form-data
+      description: Upload file ke local storage
+      parameters:
+      - description: File to upload
+        in: formData
+        name: file
+        required: true
+        type: file
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Upload berhasil
+          schema:
+            additionalProperties: true
+            type: object
+        "400":
+          description: Bad request
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "500":
+          description: Internal server error
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      summary: Upload file
+      tags:
+      - Files
+  /files/view/{path}:
+    get:
+      description: Download atau view file dari local storage
+      parameters:
+      - description: File path
+        in: path
+        name: path
+        required: true
+        type: string
+      produces:
+      - application/octet-stream
+      responses:
+        "200":
+          description: File content
+          schema:
+            type: file
+        "404":
+          description: File not found
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      summary: Download/View file
+      tags:
+      - Files
+swagger: "2.0"
